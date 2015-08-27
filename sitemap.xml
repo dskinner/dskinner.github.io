@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://blog.dasa.cc/</loc>
+    <lastmod>2008-08-22T23:13:00-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/project-eulier-and-xslt/</loc>
+    <lastmod>2008-08-22T23:13:00-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/cherrypy-sqlalchemy-and-uri-to-sql-method/</loc>
+    <lastmod>2008-08-14T18:56:00-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/wordpress-blogspot/</loc>
+    <lastmod>2008-08-11T08:32:00-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/cherrypy-sndobj-and-svg/</loc>
+    <lastmod>2008-08-10T22:55:00-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/sndobj-jack-and-inputs/</loc>
+    <lastmod>2008-08-08T21:39:00-05:00</lastmod>
+  </url>
+  
+</urlset>

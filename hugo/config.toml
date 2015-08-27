@@ -1,0 +1,15 @@
+baseurl = "http://blog.dasa.cc/"
+languageCode = "en-us"
+title = "All Things Related"
+theme = "hyde"
+
+[params]
+description = "despiteallobjections return"
+
+[[menu.main]]
+name = "Github"
+url = "https://github.com/dskinner"
+
+[[menu.main]]
+name = "Livecoding.tv"
+url = "https://www.livecoding.tv/dskinner/"

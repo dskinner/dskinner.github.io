@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>All Things Related</title>
+    <link>http://blog.dasa.cc/</link>
+    <description>Recent content on All Things Related</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 22 Aug 2008 23:13:00 -0500</lastBuildDate>
+    <atom:link href="http://blog.dasa.cc/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Project Eulier and XSLT</title>
+      <link>http://blog.dasa.cc/post/project-eulier-and-xslt/</link>
+      <pubDate>Fri, 22 Aug 2008 23:13:00 -0500</pubDate>
+      
+      <guid>http://blog.dasa.cc/post/project-eulier-and-xslt/</guid>
+      <description>&lt;p&gt;Well when i came across &lt;a href=&#34;http://www.projecteuler.net/&#34;&gt;Project Euler&lt;/a&gt; and saw the first problem, i naturally did what anyone in their right mind would do &amp;hellip; solve it using xslt&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;xsl:stylesheet xmlns:xsl=&amp;quot;http://www.w3.org/1999/XSL/Transform&amp;quot; version=&amp;quot;1.0&amp;quot;&amp;gt;
+    &amp;lt;xsl:output method=&amp;quot;text&amp;quot;/&amp;gt;
+    &amp;lt;xsl:variable name=&amp;quot;iterations&amp;quot; select=&amp;quot;1000&amp;quot;/&amp;gt;
+    
+    &amp;lt;xsl:template name=&amp;quot;sum_multiples&amp;quot;&amp;gt;
+        &amp;lt;xsl:param name=&amp;quot;i&amp;quot;&amp;gt;0&amp;lt;/xsl:param&amp;gt;
+        &amp;lt;xsl:param name=&amp;quot;incrementer&amp;quot;&amp;gt;&amp;lt;/xsl:param&amp;gt;
+        &amp;lt;xsl:param name=&amp;quot;result&amp;quot;&amp;gt;0&amp;lt;/xsl:param&amp;gt;
+        
+        &amp;lt;xsl:choose&amp;gt;
+            &amp;lt;xsl:when test=&amp;quot;$i &amp;lt; $iterations&amp;quot;&amp;gt;
+                &amp;lt;xsl:call-template name=&amp;quot;sum_multiples&amp;quot;&amp;gt;
+                    &amp;lt;xsl:with-param name=&amp;quot;i&amp;quot; select=&amp;quot;$i + $incrementer&amp;quot;/&amp;gt;
+                    &amp;lt;xsl:with-param name=&amp;quot;result&amp;quot; select=&amp;quot;$result + $i&amp;quot;/&amp;gt;
+                    &amp;lt;xsl:with-param name=&amp;quot;incrementer&amp;quot; select=&amp;quot;$incrementer&amp;quot;/&amp;gt;
+                &amp;lt;/xsl:call-template&amp;gt;
+            &amp;lt;/xsl:when&amp;gt;
+            
+            &amp;lt;xsl:otherwise&amp;gt;
+                &amp;lt;xsl:value-of select=&amp;quot;$result&amp;quot;/&amp;gt;
+            &amp;lt;/xsl:otherwise&amp;gt;
+        &amp;lt;/xsl:choose&amp;gt;
+    &amp;lt;/xsl:template&amp;gt;
+    
+    &amp;lt;xsl:template match=&amp;quot;/&amp;quot;&amp;gt;
+    &amp;lt;xsl:param name=&amp;quot;three&amp;quot;&amp;gt;
+        &amp;lt;xsl:call-template name=&amp;quot;sum_multiples&amp;quot;&amp;gt;
+            &amp;lt;xsl:with-param name=&amp;quot;incrementer&amp;quot;&amp;gt;3&amp;lt;/xsl:with-param&amp;gt;
+        &amp;lt;/xsl:call-template&amp;gt;
+    &amp;lt;/xsl:param&amp;gt;
+    &amp;lt;xsl:param name=&amp;quot;five&amp;quot;&amp;gt;
+        &amp;lt;xsl:call-template name=&amp;quot;sum_multiples&amp;quot;&amp;gt;
+            &amp;lt;xsl:with-param name=&amp;quot;incrementer&amp;quot;&amp;gt;5&amp;lt;/xsl:with-param&amp;gt;
+        &amp;lt;/xsl:call-template&amp;gt;
+    &amp;lt;/xsl:param&amp;gt;
+    &amp;lt;xsl:param name=&amp;quot;dups&amp;quot;&amp;gt;
+        &amp;lt;xsl:call-template name=&amp;quot;sum_multiples&amp;quot;&amp;gt;
+            &amp;lt;xsl:with-param name=&amp;quot;incrementer&amp;quot;&amp;gt;15&amp;lt;/xsl:with-param&amp;gt;
+        &amp;lt;/xsl:call-template&amp;gt;
+    &amp;lt;/xsl:param&amp;gt;
+    &amp;lt;xsl:value-of select=&amp;quot;$three + $five - $dups&amp;quot;/&amp;gt;
+    &amp;lt;/xsl:template&amp;gt;
+&amp;lt;/xsl:stylesheet&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;the same thing in python could go something like&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;three = [x for x in range(1000) if x % 3 is 0]
+five = [x for x in range(1000) if x % 5 is 0]
+print sum(set(three + five))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Edit: Im still learning python, well after posting this and on the ride home i realized i could define my list with one line.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;print sum([x for x in range(1000) if x % 3 is 0 or x % 5 is 0])&lt;/code&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CherryPy, SQLAlchemy, and URI to SQL method</title>
+      <link>http://blog.dasa.cc/post/cherrypy-sqlalchemy-and-uri-to-sql-method/</link>
+      <pubDate>Thu, 14 Aug 2008 18:56:00 -0500</pubDate>
+      
+      <guid>http://blog.dasa.cc/post/cherrypy-sqlalchemy-and-uri-to-sql-method/</guid>
+      <description>&lt;p&gt;Ok some basic info first. I have sqlalchemy objects defined. I use cherrypy and have been writing methods for doing queries to my tables in the various means ive learned how over the past couple years. that is to say,&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;/show_actor?id=4&amp;amp;production_id=2&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;I keep looking at this code and thinking, this just isn&amp;rsquo;t right, i was even recently looking at the turbogears2 wiki example (getting ideas for decorator usage and such) and seeing similar code, Again thinking, this just isn&amp;rsquo;t right. Then somewhere between thinking and writing some code, i ended up halfway through the following and dont know how i got there. Basically its a uri to sql method. I make use of cherrypy&amp;rsquo;s default method to traverse the uri that gets passed as *args &amp;hellip; well traverse it as in translate it into traversing my sql tables. Its all very short and concise i think.&lt;/p&gt;
+
+&lt;p&gt;I got the first draft of my uri to sql done, it goes something like this,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;@expose
+def default(self, *args, **kwargs):
+    for n in args:
+        if n in globals():
+            query=Session.query(globals()[n])
+    for k,v in make_filters(args):
+        query=query.filter(globals()[k].name==v)
+    yield json(query.all())
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and uses this outside function&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def make_filters(uri):
+    for n in range(len(uri)):
+        if not n%2 and n+1 &amp;lt; len(uri):
+            yield [uri[n], uri[n+1]]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Basically now, the args passed to my default method let me traverse my sql tables like it was a directory tree. So you might say, i can open my folder Productions and find &amp;ldquo;aa&amp;rdquo; in there, and then i can open my Capture data related to &amp;ldquo;aa&amp;rdquo; and find MC001, or go to my Actor folder and get all my actor files such as &amp;ldquo;Jon&amp;rdquo; all accessible via&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;/show/Production/aa/Capture/MC001&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;/show/Production/aa/Actor/Jon&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;then using keyword arguments like&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;/show/Production/aa/Actor/Jon?type=json&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;i can specify special conditions or whatever and ive totally eliminated this really lame reiterative code of multiple methods for calling different data like /show_actor?prod_id=1, or calls with multiple if statements for handling what im asking for and its totally recursive no matter how deeply nested my tables are.&lt;/p&gt;
+
+&lt;p&gt;Im sure theres tons of problems and some shortsightedness here, and im still a relative newb to python (going on 6 months of use now i think) but anyway, i really dig this. Now I can start coding my ajax app to grab this or grab that and as I define tables through sqlalchemy, i will automatically be able to access my data.&lt;/p&gt;
+
+&lt;p&gt;Some things I need/want to do now is to provide custom filter options via keyword arguments and some sort of deliver data as type .. w/e, json, xml, yaml, yadda yadda yadda&lt;/p&gt;
+
+&lt;p&gt;Also to note, i call a json method in my code, thats part of a (probably overly complicated) generator i wrote that takes an sqlalchemy result object and produces a usable dict that gets dumped to json. It needs some extra work I think to be more useful but does what i need it to for now. Heres the code for that&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def gmap(obj):
+    for item in obj.__dict__.items():
+        if item[0][0] is &#39;_&#39;:
+            continue
+        if isinstance(item[1], unicode):
+            yield [item[0], str(item[1])]
+        else:
+            yield item
+
+def json(obj):
+    if isinstance(obj, list):
+        return simplejson.dumps( map(lambda x: dict(x), map(lambda x: gmap(x), obj)) )
+    else:
+        return simplejson.dumps( dict(gmap(obj)) )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Thanks to google&amp;rsquo;s advanced python talk on video.google for breaking down some key concepts on generators and such.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Wordpress, Blogspot</title>
+      <link>http://blog.dasa.cc/post/wordpress-blogspot/</link>
+      <pubDate>Mon, 11 Aug 2008 08:32:00 -0500</pubDate>
+      
+      <guid>http://blog.dasa.cc/post/wordpress-blogspot/</guid>
+      <description>&lt;p&gt;Ive only recently started blogging and there were two choices that came to mind. Wordpress, which ive heard about and a rather famous blogging util, and blogger, which i once looked at many years ago and also integrates with my other google services. I figured i would give both a go and after a few hours of accumulative use, I decided i liked blogger best as i accomplished what i wanted more quickly. Unfortunately i noticed that nothing i posted in blogger showed up as a google search result, whereas my post in wordpress would show up as a first result, when typing in two keywords, overnight! Since my utmost main concern is access to my meager blog, I will be discontinuing my use of blogger but leaving it up incase it was indexed by some other service. Here is a Link to both blogs&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://dasacc22.wordpress.com&#34;&gt;http://dasacc22.wordpress.com&lt;/a&gt;
+&lt;a href=&#34;http://dasacc22.blogspot.com&#34;&gt;http://dasacc22.blogspot.com&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>CherryPy, SndObj, and SVG</title>
+      <link>http://blog.dasa.cc/post/cherrypy-sndobj-and-svg/</link>
+      <pubDate>Sun, 10 Aug 2008 22:55:00 -0500</pubDate>
+      
+      <guid>http://blog.dasa.cc/post/cherrypy-sndobj-and-svg/</guid>
+      <description>&lt;p&gt;Ok so sometime back when i first started tinkering with pysndobj, i was toying with some ideas for a user interface. Primarily i come from a web background and i decided to toy with the idea of a web frontend to a sndobj thread(s) that would write to an output stream that multiple people could connect to to work collaboratively together semi-realtime. Yeah, it sounds a bit amibitious but anyway I decided to take the time to toy around with SVG as well, which ive never worked with, to see what I might come up with.&lt;/p&gt;
+
+&lt;p&gt;Ultimately, I got this, &lt;a href=&#34;http://dasacc22.googlepages.com/cpsndobj.tar.gz&#34;&gt;cpsndobj&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This is the source code to my simple cherrypy/sndobj/svg demo. Basically I have an svg knob that i made that you can manipulate by clicking and dragging the mouse down on it. Unfortunately with a browser you cannot lock the mouse down in place so it can seem a bit odd if you reach the edge of your screen. But anyways, tar -xzf this bad boy and ./python cpsndobj.py and you will find a local webserver at &lt;a href=&#34;http://127.0.0.1:8080/&#34;&gt;http://127.0.0.1:8080/&lt;/a&gt;. Of course you need to sudo easy_install-2.5 cherrypy if you wanna use it. The rest is javascript(jquery if i remember correctly(been a while since i looked(i think this is why i like python, avoiding all these tags(woot!)))). And I believe I have it set to connect to a jack server so you&amp;rsquo;ll want to change it to SndRTIO if you want otherwise or start your jack first. After you get it up and running, visit the local address /on to turn on the modulating frequency the visit the root of the site to display the svg knob. Now click and drag it. and youll see it do its thing. Things to note, if your using internet explorer, you&amp;rsquo;ll need to install the adobe svg viewer (though ive not tested it in IE). Here in firefox land, we apparently like things to run slow so if youd like to experience a smooth svg knob .. experience, then get opera installed and notice the difference.&lt;/p&gt;
+
+&lt;p&gt;Uh but yet, i dont use opera past playing with an svg knob and playing flash movies that dont lock up my browser in linux.&lt;/p&gt;
+
+&lt;p&gt;One might say, ultimately i basically have a tinker toy thats ok (woot!).&lt;/p&gt;
+
+&lt;p&gt;&amp;ndash;Edit: I suddenly realized the fallacy of my &amp;ldquo;i like python&amp;rdquo; statement above, python still has paranthesis.. duh..&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SndObj, Jack, and Inputs</title>
+      <link>http://blog.dasa.cc/post/sndobj-jack-and-inputs/</link>
+      <pubDate>Fri, 08 Aug 2008 21:39:00 -0500</pubDate>
+      
+      <guid>http://blog.dasa.cc/post/sndobj-jack-and-inputs/</guid>
+      <description>&lt;p&gt;Ok so I have been tinkering with pysndobj on and off for a while. One thing I have been wanting to do is get it setup where i have a thread using SndJackIO and doing a line in from my edirol ua-25 usb soundcard with my guitar. I couldn’t find any documentation on how to do it with SndJackIO for a while, though there was plenty for SndRTIO. But then i noticed a reference to core audio on mac and doing inputs. Effectively, there is a single SndJackIO for both input and output. So when instantiating for such just do a&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;outp = sndobj.SndJackIO(&amp;quot;MyName&amp;quot;)
+inp = outp
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Anyway, here it is in all its glory&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import sndobj
+
+jack = sndobj.SndJackIO(&#39;test5&#39;)
+inp = jack
+
+snd = sndobj.SndIn(inp, 1)
+cmb = sndobj.Comb(0.001, 0.001, snd)
+
+jack.SetOutput(1, cmb)
+
+thread = sndobj.SndThread()
+thread.AddObj(snd)
+thread.AddObj(cmb)
+thread.AddObj(inp, sndobj.SNDIO_IN)
+thread.AddObj(jack, sndobj.SNDIO_OUT)
+
+thread.ProcOn()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;ndash;Edit: Above, cmb is a filter that is not needed. You can simply SetOutput to snd instead of cmb and bypass that.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

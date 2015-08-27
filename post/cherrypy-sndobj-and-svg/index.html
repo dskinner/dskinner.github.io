@@ -1,0 +1,73 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.15-DEV" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title> CherryPy, SndObj, and SVG &middot; All Things Related </title>
+
+  
+  <link rel="stylesheet" href="http://blog.dasa.cc/css/poole.css">
+  <link rel="stylesheet" href="http://blog.dasa.cc/css/syntax.css">
+  <link rel="stylesheet" href="http://blog.dasa.cc/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="All Things Related" />
+</head>
+
+	<body class="">
+		<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://blog.dasa.cc/"><h1>All Things Related</h1></a>
+      <p class="lead">
+       despiteallobjections return 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="https://github.com/dskinner"> Github </a></li>
+      
+        <li><a href="https://www.livecoding.tv/dskinner/"> Livecoding.tv </a></li>
+      
+    </ul>
+
+    <p>&copy; 2015. All rights reserved. </p>
+  </div>
+</div>
+
+
+		<div class="content container">
+			<div class="post">
+			 	<h1>CherryPy, SndObj, and SVG</h1>
+			  <span class="post-date">Sun, Aug 10, 2008</span>
+			      <p>Ok so sometime back when i first started tinkering with pysndobj, i was toying with some ideas for a user interface. Primarily i come from a web background and i decided to toy with the idea of a web frontend to a sndobj thread(s) that would write to an output stream that multiple people could connect to to work collaboratively together semi-realtime. Yeah, it sounds a bit amibitious but anyway I decided to take the time to toy around with SVG as well, which ive never worked with, to see what I might come up with.</p>
+
+<p>Ultimately, I got this, <a href="http://dasacc22.googlepages.com/cpsndobj.tar.gz">cpsndobj</a>.</p>
+
+<p>This is the source code to my simple cherrypy/sndobj/svg demo. Basically I have an svg knob that i made that you can manipulate by clicking and dragging the mouse down on it. Unfortunately with a browser you cannot lock the mouse down in place so it can seem a bit odd if you reach the edge of your screen. But anyways, tar -xzf this bad boy and ./python cpsndobj.py and you will find a local webserver at <a href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a>. Of course you need to sudo easy_install-2.5 cherrypy if you wanna use it. The rest is javascript(jquery if i remember correctly(been a while since i looked(i think this is why i like python, avoiding all these tags(woot!)))). And I believe I have it set to connect to a jack server so you&rsquo;ll want to change it to SndRTIO if you want otherwise or start your jack first. After you get it up and running, visit the local address /on to turn on the modulating frequency the visit the root of the site to display the svg knob. Now click and drag it. and youll see it do its thing. Things to note, if your using internet explorer, you&rsquo;ll need to install the adobe svg viewer (though ive not tested it in IE). Here in firefox land, we apparently like things to run slow so if youd like to experience a smooth svg knob .. experience, then get opera installed and notice the difference.</p>
+
+<p>Uh but yet, i dont use opera past playing with an svg knob and playing flash movies that dont lock up my browser in linux.</p>
+
+<p>One might say, ultimately i basically have a tinker toy thats ok (woot!).</p>
+
+<p>&ndash;Edit: I suddenly realized the fallacy of my &ldquo;i like python&rdquo; statement above, python still has paranthesis.. duh..</p>
+
+			</div>
+
+			
+		</div>
+
+  </body>
+</html>
