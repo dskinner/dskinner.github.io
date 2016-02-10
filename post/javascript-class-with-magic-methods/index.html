@@ -1,0 +1,191 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.15-DEV" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title> A Javascript Class with magic methods &middot; All Things Related </title>
+
+  
+  <link rel="stylesheet" href="http://blog.dasa.cc/css/poole.css">
+  <link rel="stylesheet" href="http://blog.dasa.cc/css/syntax.css">
+  <link rel="stylesheet" href="http://blog.dasa.cc/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="All Things Related" />
+</head>
+
+	<body class="">
+		<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://blog.dasa.cc/"><h1>All Things Related</h1></a>
+      <p class="lead">
+       despiteallobjections return 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="https://github.com/dskinner"> Github </a></li>
+      
+        <li><a href="https://www.livecoding.tv/dskinner/"> Livecoding.tv </a></li>
+      
+    </ul>
+
+    <p>&copy; 2016. All rights reserved. </p>
+  </div>
+</div>
+
+
+		<div class="content container">
+			<div class="post">
+			 	<h1>A Javascript Class with magic methods</h1>
+			  <span class="post-date">Fri, Dec 4, 2009</span>
+			      <p>Hey, ok so this is what i have so far, totally preliminary</p>
+
+<pre>function class() {
+    var that = function() {
+        this.__init__(arguments[0]);
+    };
+    that.prototype = new object;
+
+    for (var x=arguments.length-1; x&gt;=0; --x) {
+        var m = new arguments[x];
+        for (var i in m) { that.prototype[i] = m[i]; }
+    }
+    this[arguments[0].name] = that;
+}
+
+function object() {
+    this.__init__ = function(kwargs) {
+        for (var k in kwargs) {
+            this[k] = kwargs[k];
+        }
+    }
+}</pre>
+
+<p>Short, right?</p>
+
+<p>Then I can write something like this,</p>
+
+<pre>class(A, object)
+function A() {
+    this.get_name = function() {
+        return this.name;
+    }
+}
+
+class(B, A)
+function B() {
+    this.get_age = function() {
+        return this.age;
+    }
+}
+
+class(C, object)
+function C() {
+    this.__init__ = function() {
+        this.name = "OVERRIDE";
+    }
+}
+
+
+var a = new A({name: "Daniel", age: "24"});
+var b = new B({name: "David", age: "25"});
+var c = new C({name: "John", age: "26"});</pre>
+
+<p>effectively just sticking a little header over normal javascript functions, and everything works as one would expect.</p>
+
+<p>a.name // returns Daniel
+a.age // returns 24
+b.get_age() // returns 25
+b.get_name() // returns David
+c.name // returns OVERRIDE</p>
+
+<p>And to boot, it executes at the same speed as writing it the &ldquo;native&rdquo; way. Here&rsquo;s what i have for &ldquo;native&rdquo; (im a noob so correct any errors)</p>
+
+<pre>function object() {}
+object.prototype.init = function(kwargs) {
+    for (var k in kwargs) {
+        this[k] = kwargs[k];
+    }
+}
+
+function A(kwargs) {
+    this.init(kwargs);
+}
+A.prototype = new object;
+A.prototype.get_name = function() {
+    return this.name;
+}
+
+function B(kwargs) {
+    this.init(kwargs);
+}
+B.prototype = new A;
+B.prototype.get_age = function() {
+    return this.age;
+}
+
+function C() {
+    this.name = "OVERRIDE";
+}</pre>
+
+<p>I ran a test importing each implementation, respectively, and got similar results in execution speed and memory size. I created 100,000 thousand objects of each A, B, C and each method occupied 78mb according to top, and each method consistently ran between 2100-2300 ms with variance that occasionally hit 3000 ms. Ultimately its not surprising as all the class function i wrote does is auto write how you would do it natively. What Im surprised about is theres no extra cruft when the javascript runtime compiler handles it. I never intended this to be useful, it was all part of an experiment delving into javascript scope and messing with constructors so i could evaluate the use of a library like prototype.js or mootools.</p>
+
+<p>But hell, so far this little bit of code is turning out to be fairly useful. I imagine if i write more magic methods, the memory size will increase by a small amount. I half expected to see a difference in memory since the C is much more stripped down in &ldquo;native&rdquo; version vs the version with <strong>init</strong> cruft from object function.</p>
+
+<p>This has all been using spidermonkey-bin (smjs) so now im curious to see how other javascript implementations handle the details, as from the get-go i expected a huge increase in memory (not that I know anything about anything) from functions existing in the constructor and then being linked to a prototype, and all those &ldquo;new&rdquo; instances called in class. But it all seems negligible, in spidermonkey anyway. This could be a totally different story in IE, lol</p>
+
+<p>for reference, heres my lame-o profile code (i know, i know, but it was enough to find all sorts of issues when exploring javascript scope and constructors)</p>
+
+<pre>var date1 = new Date(); 
+var milliseconds1 = date1.getTime(); 
+
+load('custom.js'); // point this to which script to test
+var l = [];
+for (var j = 0; j &lt; 100000; ++j) {
+    l.push(new A({name: &quot;Daniel&quot;, age: &quot;24&quot;}));
+    l.push(new B({name: &quot;David&quot;, age: &quot;25&quot;}));
+    l.push(new C({name: &quot;John&quot;, age: &quot;26&quot;}));
+}
+
+var date2 = new Date(); 
+var milliseconds2 = date2.getTime(); 
+
+var difference = milliseconds2 - milliseconds1;
+print(l.length)
+print(difference)</pre>
+
+<p><strong>EDIT</strong> Also, function object needs a class(object) so you can call its magic methods, so in C</p>
+
+<pre><code>this.__init__ = function(kwargs) { object.prototype.__init__.call(this, kwargs) }
+</code></pre>
+
+<p>Of which, im a little confused, b/c I originally expected to not work. Anytime a Class(X) is called, its constructor gets replaced, so another Class(X) later on will be referring to that replaced class which i thought would cause some kind of error, or so i would think. So deep inheritance might cause some bad mojo with the amount of memory or hell if i know. I haven&rsquo;t looked into that yet</p>
+
+<p><strong>EDIT 2</strong> Also, im not sure how much of a &ldquo;class&rdquo; this is really, if it turns out useful i may find a different name, maybe just call it &ldquo;prototype&rdquo; so like</p>
+
+<pre><code>prototype(A, object)
+function A() {};
+var a = new A({name: &quot;daniel&quot;});
+</code></pre>
+
+			</div>
+
+			
+		</div>
+
+  </body>
+</html>

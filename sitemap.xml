@@ -3,8 +3,93 @@
   
   <url>
     <loc>http://blog.dasa.cc/</loc>
-    <lastmod>2008-08-22T23:13:00-05:00</lastmod>
+    <lastmod>2015-01-10T03:09:00-04:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/writing-boring-code/</loc>
+    <lastmod>2015-01-10T03:09:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/git-email-notifications-on-push/</loc>
+    <lastmod>2012-11-19T12:23:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/sublime-text-2-multiple-cursors/</loc>
+    <lastmod>2012-11-17T02:18:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/xmonad/</loc>
+    <lastmod>2012-06-13T13:34:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/fast-web-dev-with-damsel-for-python/</loc>
+    <lastmod>2012-01-22T04:53:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/line6-ux2-linux/</loc>
+    <lastmod>2010-02-24T11:06:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/js-js-say-whaa/</loc>
+    <lastmod>2009-12-05T17:19:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/new-way-to-prototype-with-javascript/</loc>
+    <lastmod>2009-12-05T14:17:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/javascripts-not-all-bad/</loc>
+    <lastmod>2009-12-05T08:18:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/whats-wrong-with-javascript-prototype/</loc>
+    <lastmod>2009-12-04T17:31:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/javascript-class-with-magic-methods/</loc>
+    <lastmod>2009-12-04T12:07:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/baffling-results-from-my-javascript/</loc>
+    <lastmod>2009-12-04T08:14:00-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/motionbuilder-opencv-in-harmony/</loc>
+    <lastmod>2008-11-14T23:43:00-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/pandora-minus-the-cruft-with-xul/</loc>
+    <lastmod>2008-11-06T11:00:00-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/ibm-sliding-puzzle-contest/</loc>
+    <lastmod>2008-10-23T16:54:00-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/google-chrome-os-and-web-development/</loc>
+    <lastmod>2008-09-13T11:54:00-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.dasa.cc/post/ableton-live-linux-and-wine/</loc>
+    <lastmod>2008-08-27T00:07:00-05:00</lastmod>
   </url>
   
   <url>

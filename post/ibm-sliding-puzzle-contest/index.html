@@ -1,0 +1,123 @@
+	<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.15-DEV" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title> IBM Sliding Puzzle Contest &middot; All Things Related </title>
+
+  
+  <link rel="stylesheet" href="http://blog.dasa.cc/css/poole.css">
+  <link rel="stylesheet" href="http://blog.dasa.cc/css/syntax.css">
+  <link rel="stylesheet" href="http://blog.dasa.cc/css/hyde.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.png">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="All Things Related" />
+</head>
+
+	<body class="">
+		<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://blog.dasa.cc/"><h1>All Things Related</h1></a>
+      <p class="lead">
+       despiteallobjections return 
+      </p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href="/">Home</a> </li>
+      
+        <li><a href="https://github.com/dskinner"> Github </a></li>
+      
+        <li><a href="https://www.livecoding.tv/dskinner/"> Livecoding.tv </a></li>
+      
+    </ul>
+
+    <p>&copy; 2016. All rights reserved. </p>
+  </div>
+</div>
+
+
+		<div class="content container">
+			<div class="post">
+			 	<h1>IBM Sliding Puzzle Contest</h1>
+			  <span class="post-date">Thu, Oct 23, 2008</span>
+			      <p>So someone passed onto me a pdf for an IBM sliding puzzle contest. Basically, it consists of a 3 row by 3 column puzzle with one empty space, you know the ones, and you have to write a piece of software that solves for the answer. The instructional pdf suggests that while its acceptable for your answer to be over 20 moves, it should optimally be about 20 or less and be relatively quick.</p>
+
+<p>At first I had no clue about how to do something like this but found the idea very interesting. Four hours later I had a python script that solves for all possible solutions up to how ever many moves you choose it too. Turns out the shortest answer is 12 moves, according to my script. I haven&rsquo;t validated the 12 move answer, but i did validate a 14 move answer by hand with success (which was actually a twelve move answer with a repeat move making it 14), and i see little reason for the 12 move answer to be wrong.</p>
+
+<p>Anyway, here it is in all its glory</p>
+
+<pre><code>puzzle = ['0', '4', '2', '5', '8', '3', '1', '7', '6']
+
+answers = []
+
+possible_moves = [
+    [lambda p: swap(p, 1, 0), lambda p: swap(p, 3, 0)],
+    [lambda p: swap(p, 0, 1), lambda p: swap(p, 2, 1), lambda p: swap(p, 4, 1)],
+    [lambda p: swap(p, 1, 2), lambda p: swap(p, 5, 2)],
+    [lambda p: swap(p, 0, 3), lambda p: swap(p, 4, 3), lambda p: swap(p, 6, 3)],
+    [lambda p: swap(p, 1, 4), lambda p: swap(p, 3, 4), lambda p: swap(p, 5, 4), lambda p: swap(p, 7, 4)],
+    [lambda p: swap(p, 2, 5), lambda p: swap(p, 4, 5), lambda p: swap(p, 8, 5)],
+    [lambda p: swap(p, 3, 6), lambda p: swap(p, 7, 6)],
+    [lambda p: swap(p, 4, 7), lambda p: swap(p, 6, 7), lambda p: swap(p, 8, 7)],
+    [lambda p: swap(p, 5, 8), lambda p: swap(p, 7, 8)]
+]
+
+def serialize(p):
+    return ''.join(p)
+
+def swap(L, m, t):
+    if L[t] is '0':
+        L[t] = L[m]
+        L[m] = '0'
+        return serialize(L)
+    
+def no_dups(S):
+    if len(S.split(&quot;-&quot;)) != len(set(S.split(&quot;-&quot;))):
+        return False
+    else:
+        return True
+
+def search(tree, index=0):
+    if index &amp;lt; 12:
+        for each in tree:
+            for i, val in enumerate(list(each.split(&quot;-&quot;)[-1])):
+                if val is '0':
+                    generation = []
+                    for move in possible_moves[i]:
+                        result = each+&quot;-&quot;+move(list(each.split(&quot;-&quot;)[-1]))
+                        if &quot;123456780&quot; in result:
+                            answers.append(result)
+                        elif no_dups(result):
+                            generation.append(result)
+                    search(generation, index+1)
+
+search([&quot;-&quot;+serialize(puzzle)])
+shortest_answer = sorted(answers)[0]
+print &quot;==========&quot;
+print &quot;Shortest Answer: &quot; + str(len(shortest_answer.split(&quot;-&quot;))-2) + &quot; Moves&quot;
+print &quot;++++++++++&quot;
+print shortest_answer
+</code></pre>
+
+<p>Edit: I just thought i would add,
+yeah so the thing that was the turning point for solving this thing was how you look at solving the puzzle. Ive always looked at those puzzles as, ok what can i move into the empty space and rotate these pieces around and this and that but thats totally the wrong viewpoint. The way to visualize solving the answer is to look at the empty space as your focus and to move the empty space around, pushing the other numbers around into place. The puzzle suddenly becomes eaiser to solve by hand on your own and thats how the program solves for the answer too, by moving the empty space around, not trying to calculate how to get a particular number to its destination</p>
+
+			</div>
+
+			
+		</div>
+
+  </body>
+</html>

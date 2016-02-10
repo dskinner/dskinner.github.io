@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-  <title> Wordpress, Blogspot &middot; All Things Related </title>
+  <title> Git Email Notifications on Push &middot; All Things Related </title>
 
   
   <link rel="stylesheet" href="http://blog.dasa.cc/css/poole.css">
@@ -50,12 +50,28 @@
 
 		<div class="content container">
 			<div class="post">
-			 	<h1>Wordpress, Blogspot</h1>
-			  <span class="post-date">Mon, Aug 11, 2008</span>
-			      <p>Ive only recently started blogging and there were two choices that came to mind. Wordpress, which ive heard about and a rather famous blogging util, and blogger, which i once looked at many years ago and also integrates with my other google services. I figured i would give both a go and after a few hours of accumulative use, I decided i liked blogger best as i accomplished what i wanted more quickly. Unfortunately i noticed that nothing i posted in blogger showed up as a google search result, whereas my post in wordpress would show up as a first result, when typing in two keywords, overnight! Since my utmost main concern is access to my meager blog, I will be discontinuing my use of blogger but leaving it up incase it was indexed by some other service. Here is a Link to both blogs</p>
+			 	<h1>Git Email Notifications on Push</h1>
+			  <span class="post-date">Mon, Nov 19, 2012</span>
+			      <p>So I&rsquo;m doing a private collab and hosting a git repo off my server. Got annoying pretty quick with these occasional emails &ldquo;hey pushed xyz change that could affect abc for you, make sure to pull the latest&rdquo;</p>
 
-<p><a href="http://dasacc22.wordpress.com">http://dasacc22.wordpress.com</a>
-<a href="http://dasacc22.blogspot.com">http://dasacc22.blogspot.com</a></p>
+<p>Enter this script, <a href="http://git.kernel.org/?p=git/git.git;a=blob;f=contrib/hooks/post-receive-email;h=60cbab65d3f8230be3041a13fac2fd9f9b3018d5;hb=HEAD">post-receive-email</a></p>
+
+<p>To get going with it, I did the following, (line breaks for readability here):</p>
+
+<pre><code>wget -O '/user/local/bin/post-receive-email' 'http://git.kernel.org/?p=git/git.git;a=blob_plain;f=contrib/hooks/' 'post-receive-email;h=60cbab65d3f8230be3041a13fac2fd9f9b3018d5;hb=HEAD'
+
+chmod a+x /usr/local/bin/post-receive-email
+</code></pre>
+
+<p>Next, link to this in your repo with <code>ln -s /usr/local/bin/post-receive-email hooks/post-receive</code> and add something like this to config</p>
+
+<pre><code>[hooks]
+    mailinglist = &quot;jane@email.com, john@email.com&quot;
+    envelopesender = no-reply@email.com
+    emailprefix = &quot;[GIT] &quot;
+</code></pre>
+
+<p>And that will notify the mailing list of any push that occurs. There&rsquo;s a number of other options worth exploring by reading the post-receive-email bash script.</p>
 
 			</div>
 
