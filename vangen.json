@@ -19,7 +19,13 @@
       ],
       "url": "https://github.com/dskinner/material"
     },
-
+    {
+      "prefix": "simplex",
+      "subs": [
+        "exact"
+      ],
+      "url": "https://github.com/dskinner/simplex"
+    },
     {
       "prefix": "snd",
       "subs": [
