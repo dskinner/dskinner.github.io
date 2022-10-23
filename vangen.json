@@ -1,51 +1,62 @@
 {
-  "domain": "dasa.cc",
-  "repositories": [
-    {
-      "prefix": "git",
-      "subs": [
-        "cmd/ggit"
-      ],
-      "url": "https://github.com/dskinner/git"
-    },
-    {
-      "prefix": "material",
-      "subs": [
-        "assets",
-	"atlas",
-	"glutil",
-	"icon",
-	"text"
-      ],
-      "url": "https://github.com/dskinner/material"
-    },
-    {
-      "prefix": "simplex",
-      "subs": [
-        "exact"
-      ],
-      "url": "https://github.com/dskinner/simplex"
-    },
-    {
-      "prefix": "snd",
-      "subs": [
-        "al"
-      ],
-      "url": "https://github.com/dskinner/snd"
-    },
-    {
-      "prefix": "x",
-      "subs": [
-        "cycle",
-	"forward",
-	"glw",
-	"gma",
-	"octree",
-	"quadtree",
-	"set",
-	"trigram"
-      ],
-      "url": "https://github.com/dskinner/x"
-    }
-  ]
+    "domain": "dasa.cc",
+    "repositories":
+    [
+        {
+            "prefix": "git",
+            "subs":
+            [
+                "cmd/ggit"
+            ],
+            "url": "https://github.com/dskinner/git"
+        },
+        {
+            "prefix": "material",
+            "subs":
+            [
+                "assets",
+                "atlas",
+                "glutil",
+                "icon",
+                "text"
+            ],
+            "url": "https://github.com/dskinner/material"
+        },
+        {
+            "prefix": "simplex",
+            "subs":
+            [
+                "exact"
+            ],
+            "url": "https://github.com/dskinner/simplex"
+        },
+        {
+            "prefix": "snd",
+            "subs":
+            [
+                "al"
+            ],
+            "url": "https://github.com/dskinner/snd"
+        },
+        {
+            "prefix": "signal",
+            "subs": [],
+            "url": "https://github.com/dskinner/signal"
+        },
+        {
+            "prefix": "x",
+            "subs":
+            [
+                "cycle",
+                "forward",
+                "glw",
+                "gma",
+                "octree",
+                "quadtree",
+                "set",
+                "trigram"
+            ],
+            "url": "https://github.com/dskinner/x"
+        }
+    ]
 }
